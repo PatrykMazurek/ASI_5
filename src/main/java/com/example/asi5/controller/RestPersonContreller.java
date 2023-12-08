@@ -1,11 +1,13 @@
 package com.example.asi5.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.asi5.repository.PersonRepository;
+import com.example.asi5.service.PersonServiceImp;
 
 import jakarta.websocket.server.PathParam;
 
@@ -18,16 +20,16 @@ import java.util.*;
 public class RestPersonContreller {
     
     @Autowired
-    PersonRepository personRepository;
+    PersonServiceImp personService;
 
     @GetMapping("/")
-    public List<Person> getAlPerson(){
-        return personRepository.findAll();
+    public ResponseEntity< List<Person> > getAlPerson(){
+        return ResponseEntity.ok().body(personService.getAllPersons());
     }
 
     @GetMapping("/{id}")
-    public Person getPerson(@PathParam("id") long id){
-        return personRepository.findById(id).orElseThrow();
+    public ResponseEntity< Person > getPerson(@PathParam("id") long id){
+        return ResponseEntity.ok().body(personService.getPerson(id));
     }
 
 }
