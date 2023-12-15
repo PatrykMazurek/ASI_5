@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://thymeleaf.com">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h3>Notowania walutowe</h3>
+        <div th:text="${exchanges.tradingDate}"></div>
+        <table>
+            <tr>
+                <th>Nazwa</th>
+                <th>Kod</th>
+                <th>Zakup</th>
+                <th>Sprzedaż</th>
+            </tr>
+            <tr th:each=" rate : ${exchanges.rates}">
+                <td th:text="${rate.currency}"></td>
+                <td th:text="${rate.code}"></td>
+                <td th:text="${rate.bid}"></td>
+                <td th:text="${rate.ask}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
